@@ -6,20 +6,25 @@
     <div class="padding">
         <div class="row container d-flex justify-content-center">
 <div class="col-md-6 col-lg-4">
-            <form class="card" action="add" method="POST">
-            @csrf
+            @forelse ($Data as $value)
+
+            <form class="card" action="{{route("index.update",$value->id)}}" method="POST">
+                @method('put')
+                @csrf
               <h5 class="card-title fw-400">Tasks</h5>
 
               <div class="card-body">
                 <div class="form-group">
-                  <input class="form-control" name="taskName" type="text" placeholder="Task name">
+                  <input class="form-control" name="taskName" value="{{$value->taskName}}" type="text" placeholder="Task name">
                 </div>
                 <div class="form-group">
-                  <input class="form-control" name="description" type="text" placeholder="Description">
+                  <input class="form-control" name="description" value="{{$value->description}}" type="text" placeholder="Description">
                 </div>
-
+                @empty
+                                
+                @endforelse       
                 
-                <button type="submit" class="btn btn-block btn-bold btn-primary">ADD</button>
+                <button type="submit" class="btn btn-block btn-bold btn-primary">update</button>
               </div>
             </form>
           </div>

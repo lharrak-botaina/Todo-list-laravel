@@ -6,7 +6,7 @@
     <div class="padding">
         <div class="row container d-flex justify-content-center">
 <div class="col-md-6 col-lg-4">
-            <form class="card" action="add" method="POST">
+            <form class="card" action="{{route('index.store')}}" method="POST">
             @csrf
               <h5 class="card-title fw-400">Tasks</h5>
 

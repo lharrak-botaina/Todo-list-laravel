@@ -11,6 +11,7 @@
 
             <table class="table bg-white rounded border">
   <thead>
+    <a href="{{route("index.create")}}"> <button>add</button></a>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Task name </th>
@@ -26,8 +27,13 @@
       <th scope="row">{{$value->id}}</th>
       <td>{{$value->taskName}}</td>
       <td>{{$value->description}}</td>
-      <td> <a href="/suprimer/{{$value->id}}"> <button>suprimer</button></a>
-           <a href="/modifier/{{$value->id}}"> <button>modifier</button></a>
+      <td> 
+        <form method="POST" action="{{route("index.destroy",$value->id)}}">
+          @csrf
+          @method('DELETE')
+        <a href=""> <button>delete</button></a>
+      </form>
+           <a href="{{route("index.edit",$value->id)}}"> <button>update</button></a>
         </td>
     
     </tr>

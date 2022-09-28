@@ -19,5 +19,4 @@ Route::get('/', function () {
 });
 
 
-route::resource("table",TaskController::class);
-route::resource("add",TaskController::class);
+route::resource("index",TaskController::class);

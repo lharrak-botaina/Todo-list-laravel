@@ -15,7 +15,7 @@ class TaskController extends Controller
     public function index()
     {
         $task= Task::all();
-        return view("table",compact('task'));
+        return view("index",compact('task'));
     }
 
     /**
@@ -25,7 +25,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        return view("add");
     }
 
     /**
@@ -46,7 +46,7 @@ class TaskController extends Controller
 
             ]);
        if($task){
-        return redirect('/table');
+        return redirect('index');
  }
     }
 
@@ -58,7 +58,10 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        //
+        $Data = Task::select("*")->where('id',$id)->get();
+        
+        return view("show",compact('Data'));
+        
     }
 
     /**
@@ -67,9 +70,11 @@ class TaskController extends Controller
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function edit(Task $task)
+    public function edit($id)
     {
-        return view('edit', compact(''));
+        $Data = Task::select('*')->where("id",$id)->get();
+        
+        return view("edit",compact('Data'));
     }
 
     /**
@@ -79,9 +84,21 @@ class TaskController extends Controller
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Task $task)
+    public function update(Request $request, Task $task ,$id)
     {
-        //
+        $name = $request->input('taskName');
+        $description= $request->input('description');
+
+        $Data = Task::where("id",$id)
+            ->update([
+             "taskName" => $name,
+            "description" => $description
+    
+    ]);
+    if($Data){
+        return redirect('index');
+        
+       }
     }
 
     /**
@@ -90,8 +107,12 @@ class TaskController extends Controller
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Task $task)
+    public function destroy($id)
     {
-        //
+        $delete = Task::where('id',$id)->delete();
+
+        if ($delete) {
+          return  redirect("index");
+        }
     }
 }
