@@ -20,3 +20,4 @@ Route::get('/', function () {
 
 
 route::resource("table",TaskController::class);
+route::resource("add",TaskController::class);
