@@ -23,7 +23,7 @@
   
   @forelse ($task as $value)
     <tr>
-      <!-- <th scope="row">1</th> -->
+      <th scope="row">{{$value->id}}</th>
       <td>{{$value->taskName}}</td>
       <td>{{$value->description}}</td>
       <td> <a href="/suprimer/{{$value->id}}"> <button>suprimer</button></a>
