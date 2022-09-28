@@ -14,7 +14,8 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $task= Task::all();
+        return view("table",compact('task'));
     }
 
     /**
@@ -35,7 +36,11 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'taskName' => 'required',
+            'description' => 'required',
+            
+        ]);
     }
 
     /**
